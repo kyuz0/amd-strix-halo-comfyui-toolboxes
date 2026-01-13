@@ -27,7 +27,7 @@ COPY workflows/API /opt/comfy-workflows
 
 # ROCm + PyTorch (TheRock, include torchaudio for resolver; remove later)
 RUN python -m pip install \
-    --index-url https://rocm.nightlies.amd.com/v2-staging/gfx1151 \
+    --index-url https://rocm.nightlies.amd.com/v2/gfx1151 \
     --pre torch torchaudio torchvision
 
 WORKDIR /opt
