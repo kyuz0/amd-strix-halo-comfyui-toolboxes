@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMD Ryzen AI Max “Strix Halo” ComfyUI Benchmarks</title>
+    <style>
+        :root {
+            --bg-body: #f9fafb;
+            --bg-card: #ffffff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --primary: #ef4444;
+            /* AMD Red-ish */
+            --primary-bg: #fef2f2;
+            --success: #10b981;
+            --success-bg: #d1fae5;
+            --error: #ef4444;
+            --error-bg: #fee2e2;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.05rem;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            background: var(--bg-card);
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-bg);
+        }
+
+        /* Toggle Switch */
+        .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--primary);
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px var(--primary);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            margin-bottom: 32px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            background: #fcfcfc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        th,
+        td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: #f9fafb;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Columns */
+        .col-workflow {
+            width: auto;
+        }
+
+        .col-res {
+            width: 15%;
+            color: #4b5563;
+        }
+
+        .col-data {
+            text-align: right;
+            width: 15%;
+            white-space: nowrap;
+            font-family: var(--font-mono);
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+        }
+
+        .col-diff {
+            text-align: right;
+            width: 12%;
+            font-weight: bold;
+            font-family: var(--font-mono);
+        }
+
+        /* Links */
+        a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px dotted #ccc;
+            transition: color 0.2s, border-bottom 0.2s;
+        }
+
+        a:hover {
+            color: var(--primary);
+            border-bottom: 1px solid var(--primary);
+        }
+
+        .val {
+            font-weight: 600;
+        }
+
+        .val-unit {
+            font-size: 0.8em;
+            color: var(--text-muted);
+            margin-left: 2px;
+        }
+
+        .diff-pos {
+            color: var(--success);
+        }
+
+        .diff-neg {
+            color: var(--error);
+        }
+
+        .type-tag {
+            display: inline-block;
+            padding: 1px 5px;
+            border-radius: 4px;
+            background: #e5e7eb;
+            color: #374151;
+            font-size: 0.7rem;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        #loading,
+        #error-msg {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+
+        #error-msg {
+            color: var(--error);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>AMD Ryzen AI Max “Strix Halo” ComfyUI Benchmarks</h1>
+            <p class="subtitle">Performance results for various ComfyUI workflows</p>
+            <p style="margin: 8px 0 0 0; font-size: 0.9rem;">
+                <a href="https://github.com/kyuz0/amd-strix-halo-comfyui-toolboxes" target="_blank"
+                    style="color: var(--primary); border-bottom: none;">View on GitHub &rarr;</a>
+            </p>
+        </header>
+
+
+
+        <div class="controls">
+            <input type="text" id="searchInput" class="search" placeholder="Search workflows..." autocomplete="off">
+            <label class="toggle-wrapper">
+                <div class="toggle-switch">
+                    <input type="checkbox" id="warmToggle" checked>
+                    <span class="slider"></span>
+                </div>
+                Warm Start
+            </label>
+            <label class="toggle-wrapper">
+                <div class="toggle-switch">
+                    <input type="checkbox" id="unitToggle">
+                    <span class="slider"></span>
+                </div>
+                Show in Minutes
+            </label>
+        </div>
+
+        <div id="dashboard">
+            <div id="loading">Loading benchmark results...</div>
+        </div>
+
+        <div class="section-card"
+            style="padding: 16px; margin-bottom: 24px; background: #f0f9ff; border-color: #bae6fd;">
+            <p style="margin: 0; font-size: 0.95rem; color: #0c4a6e;">
+                <strong>Configuration Details:</strong><br>
+                <span class="type-tag" style="background: #e0f2fe; color: #0369a1;">Default</span>: Standard environment
+                settings.<br>
+                <span class="type-tag" style="background: #e0f2fe; color: #0369a1;">MIOpen + HIPBLASLT</span>: Enabled
+                via <code>TORCH_BLAS_PREFER_HIPBLASLT=1</code> and <code>COMFYUI_ENABLE_MIOPEN=1</code>.
+            </p>
+        </div>
+
+        <footer>
+            <div>Generated by <a
+                    href="https://github.com/kyuz0/amd-strix-halo-comfyui-toolboxes/blob/main/scripts/benchmark_workflows.py"
+                    target="_blank">benchmark_workflows.py</a></div>
+        </footer>
+    </div>
+
+    <script>
+        const REPO_BASE_URL = "https://github.com/kyuz0/amd-strix-halo-comfyui-toolboxes/blob/main/workflows/API/";
+
+        // Metadata Dictionary
+        const WORKFLOW_META = {
+            "Qwen-Image-2512-FP8-20-Steps.json": { res: "1328x1328", mp: 1.76, type: "Image" },
+            "Qwen-Image-2512-FP8-4-Step-LoRA.json": { res: "1328x1328", mp: 1.76, type: "Image" },
+            "Qwen-Image-Edit-2511-FP8-20-Steps.json": { res: "Dynamic (1.6 MP)", mp: 1.6, type: "Image" },
+            "Qwen-Image-Edit-2511-FP8-4-Step-LoRA.json": { res: "Dynamic (1.6 MP)", mp: 1.6, type: "Image" },
+            "Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1.json": { res: "1280x720 (81 frames)", mp: 0.92, type: "Video" },
+            "Wan2.2-T2V-A14B-FP8-4steps-lora-rank64-Seko-V2.json": { res: "1280x720 (81 frames)", mp: 0.92, type: "Video" },
+            "video_hunyuan_video_1.5_720p_i2v.json": { res: "1280x720 (121 frames)", mp: 0.92, type: "Video" },
+            "video_hunyuan_video_1.5_720p_t2v.json": { res: "1280x720 (121 frames)", mp: 0.92, type: "Video" }
+        };
+
+        let rawData = [];
+        let state = {
+            search: "",
+            useMinutes: false,
+            useWarm: true
+        };
+
+        const $ = id => document.getElementById(id);
+
+        async function init() {
+            try {
+                const res = await fetch('benchmark_results.json');
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                rawData = await res.json();
+                render();
+            } catch (e) {
+                const container = $('dashboard');
+                container.innerHTML = `<div id="error-msg">Error loading benchmark_results.json: ${e.message}</div>`;
+                console.error(e);
+            }
+        }
+
+        $('searchInput').addEventListener('input', e => {
+            state.search = e.target.value.toLowerCase();
+            render();
+        });
+
+        $('unitToggle').addEventListener('change', e => {
+            state.useMinutes = e.target.checked;
+            render();
+        });
+
+        $('warmToggle').addEventListener('change', e => {
+            state.useWarm = e.target.checked;
+            render();
+        });
+
+        function formatDuration(seconds) {
+            if (!seconds) return '<span class="val">N/A</span>';
+
+            if (state.useMinutes) {
+                const m = Math.floor(seconds / 60);
+                const s = Math.round(seconds % 60);
+                return `<span class="val">${m}</span><span class="val-unit">m</span> <span class="val">${s.toString().padStart(2, '0')}</span><span class="val-unit">s</span>`;
+            } else {
+                return `<span class="val">${Math.round(seconds)}</span><span class="val-unit">s</span>`;
+            }
+        }
+
+        function render() {
+            const container = $('dashboard');
+
+            // 1. Group Data by Workflow
+            const grouped = {};
+
+            rawData.forEach(item => {
+                const name = item.workflow;
+                if (!grouped[name]) grouped[name] = { name: name, default: null, miopen_hipblaslt: null };
+
+                // Treat missing config as default
+                const config = item.config || 'default';
+                if (config === 'default') grouped[name].default = item;
+                if (config === 'miopen_hipblaslt') grouped[name].miopen_hipblaslt = item;
+            });
+
+            // 2. Convert to Array and Filter
+            let items = Object.values(grouped).filter(item => {
+                return !state.search || item.name.toLowerCase().includes(state.search);
+            });
+
+            if (items.length === 0) {
+                container.innerHTML = '<div id="loading">No workflows match your search.</div>';
+                return;
+            }
+
+            // 3. Sort by Name
+            items.sort((a, b) => a.name.localeCompare(b.name));
+
+            container.innerHTML = "";
+
+            const card = document.createElement('div');
+            card.className = "section-card";
+
+            const header = document.createElement('div');
+            header.className = "section-header";
+            header.innerHTML = `
+                <h2>Workflow Results</h2>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">${items.length} Workflows</div>
+            `;
+            card.appendChild(header);
+
+            const tableResp = document.createElement('div');
+            tableResp.className = "table-responsive";
+
+            const table = document.createElement('table');
+            const thead = document.createElement('thead');
+            thead.innerHTML = `
+                <tr>
+                    <th class="col-workflow">Workflow File</th>
+                    <th class="col-res">Resolution</th>
+                    <th class="col-data">Default</th>
+                    <th class="col-data">MIOpen + HIPBLASLT</th>
+                    <th class="col-diff">Difference</th>
+                </tr>
+            `;
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+
+            items.forEach(item => {
+                const tr = document.createElement('tr');
+
+                // Metadata
+                const meta = WORKFLOW_META[item.name] || {};
+                const resLabel = meta.res || "";
+
+                const typeTag = meta.type ? `<span class="type-tag">${meta.type}</span>` : "";
+
+                // Data
+                const getTime = (data) => {
+                    if (!data) return null;
+                    if (state.useWarm) {
+                        return data.warm_run_seconds || data.duration_seconds;
+                    } else {
+                        return data.cold_run_seconds || data.duration_seconds;
+                    }
+                };
+
+                let defSec = getTime(item.default);
+                let optSec = getTime(item.miopen_hipblaslt);
+
+                if (defSec) defSec = Math.round(defSec);
+                if (optSec) optSec = Math.round(optSec);
+
+                const defHtml = formatDuration(defSec);
+                const optHtml = formatDuration(optSec);
+
+                // Diff
+                let diffHtml = '<span style="color:#ccc">-</span>';
+                if (defSec && optSec) {
+                    // Improvement: (Default - Opt) / Default
+                    const imp = (defSec - optSec) / defSec * 100;
+                    const sign = imp > 0 ? "+" : "";
+                    const cssClass = imp > 0 ? "diff-pos" : (imp < 0 ? "diff-neg" : "");
+                    diffHtml = `<span class="${cssClass}">${sign}${imp.toFixed(2)}%</span>`;
+                }
+
+                // Workflow Link
+                const workflowUrl = REPO_BASE_URL + item.name;
+
+                tr.innerHTML = `
+                    <td>
+                        <a href="${workflowUrl}" target="_blank" title="View workflow JSON">${item.name}</a>
+                        ${typeTag}
+                    </td>
+                    <td class="col-res">
+                        ${resLabel}
+                    </td>
+                    <td class="col-data">
+                        ${defHtml}
+                    </td>
+                    <td class="col-data">
+                        ${optHtml}
+                    </td>
+                    <td class="col-diff">
+                        ${diffHtml}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            table.appendChild(tbody);
+            tableResp.appendChild(table);
+            card.appendChild(tableResp);
+            container.appendChild(card);
+        }
+
+        init();
+    </script>
+</body>
+
+</html>
