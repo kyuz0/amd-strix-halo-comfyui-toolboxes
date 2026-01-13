@@ -17,6 +17,11 @@ REPO_LORA="lightx2v/Wan2.2-Lightning"
 mkdir -p "$MODEL_HOME"/{text_encoders,vae,diffusion_models,loras}
 mkdir -p "$STAGE"
 
+PRECISION="fp8"
+if [[ "${2:-}" == "fp16" ]]; then
+  PRECISION="fp16"
+fi
+
 download_if_missing () {
   local repo="$1"
   local remote="$2"
@@ -44,24 +49,13 @@ download_if_missing () {
 
 usage() {
   cat <<'USAGE'
-Usage: get_wan22.sh <target>
+Usage: get_wan22.sh <target> [fp16]
 
 Targets:
   common     Text encoder + VAEs
-             - text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors (from Wan 2.1)
-             - vae/wan_2.1_vae.safetensors (from Wan 2.2)
-
-  14b-t2v    14B T2V diffusion models (FP8)
-             - diffusion_models/wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors
-             - diffusion_models/wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors
-
-  14b-i2v    14B I2V diffusion models (FP8)
-             - diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors
-             - diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors
-
+  14b-t2v    14B T2V diffusion models (Defaults to FP8, use 'fp16' as 2nd arg for FP16)
+  14b-i2v    14B I2V diffusion models (Defaults to FP8, use 'fp16' as 2nd arg for FP16)
   lora       Wan2.2 Lightning LoRAs
-             - T2V (Seko V2): loras/Wan2.2-T2V-A14B-4steps-lora-rank64-Seko-V2/...
-             - I2V (Seko V1):   loras/Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1/...
 
 Maintenance:
   clean-stage   Remove staging folder (keeps final models)
@@ -75,20 +69,33 @@ USAGE
 case "${1:-}" in
   common)
     echo "==> text encoder + VAEs"
-    # Text Encoder from Wan 2.1
-    download_if_missing "$REPO_21" "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors" "text_encoders"
-    # VAE from Wan 2.2
+    if [[ "$PRECISION" == "fp16" ]]; then
+         # Use fp16 text encoder if available or if standard
+         download_if_missing "$REPO_22" "split_files/text_encoders/umt5_xxl_fp16.safetensors" "text_encoders"
+    else
+         download_if_missing "$REPO_21" "split_files/text_encoders/umt5_xxl_fp8_e4m3fn_scaled.safetensors" "text_encoders"
+    fi
     download_if_missing "$REPO_22" "split_files/vae/wan_2.1_vae.safetensors" "vae"
     ;;
   14b-t2v)
-    echo "==> 14B Text→Video (FP8)"
-    download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors" "diffusion_models"
-    download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors" "diffusion_models"
+    echo "==> 14B Text→Video ($PRECISION)"
+    if [[ "$PRECISION" == "fp16" ]]; then
+        download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_t2v_high_noise_14B_fp16.safetensors" "diffusion_models"
+        download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_t2v_low_noise_14B_fp16.safetensors" "diffusion_models"
+    else
+        download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_t2v_high_noise_14B_fp8_scaled.safetensors" "diffusion_models"
+        download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_t2v_low_noise_14B_fp8_scaled.safetensors" "diffusion_models"
+    fi
     ;;
   14b-i2v)
-    echo "==> 14B Image→Video (FP8)"
-    download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" "diffusion_models"
-    download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors" "diffusion_models"
+    echo "==> 14B Image→Video ($PRECISION)"
+    if [[ "$PRECISION" == "fp16" ]]; then
+        download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp16.safetensors" "diffusion_models"
+        download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp16.safetensors" "diffusion_models"
+    else
+        download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors" "diffusion_models"
+        download_if_missing "$REPO_22" "split_files/diffusion_models/wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors" "diffusion_models"
+    fi
     ;;
   lora)
     echo "==> Wan2.2 Lightning LoRAs (Seko V2)"

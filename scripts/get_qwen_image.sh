@@ -46,22 +46,36 @@ else
   read -rp "Enter 1, 2, 3 or 4: " choice
 fi
 
+PRECISION="fp8"
+if [[ "${2:-}" == "bf16" ]]; then
+  PRECISION="bf16"
+fi
+
 case "$choice" in
   1)
     REPO="Comfy-Org/Qwen-Image_ComfyUI"
-    echo "==> Downloading Qwen-Image 2512 (20B)"
-    dl "$REPO" "split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors" "diffusion_models"
+    echo "==> Downloading Qwen-Image 2512 (20B) - $PRECISION"
+    if [[ "$PRECISION" == "bf16" ]]; then
+         dl "$REPO" "split_files/diffusion_models/qwen_image_2512_bf16.safetensors" "diffusion_models"
+    else
+         dl "$REPO" "split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors" "diffusion_models"
+    fi
     dl "$REPO" "split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors" "text_encoders"
     dl "$REPO" "split_files/vae/qwen_image_vae.safetensors" "vae"
     ;;
   2)
     REPO="Comfy-Org/Qwen-Image-Edit_ComfyUI"
-    echo "==> Downloading Qwen-Image-Edit"
+    echo "==> Downloading Qwen-Image-Edit - $PRECISION"
     # Requires text encoder + VAE from Qwen-Image
     BASE="Comfy-Org/Qwen-Image_ComfyUI"
     dl "$BASE" "split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors" "text_encoders"
     dl "$BASE" "split_files/vae/qwen_image_vae.safetensors" "vae"
-    dl "$REPO" "split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" "diffusion_models"
+    
+    if [[ "$PRECISION" == "bf16" ]]; then
+        dl "$REPO" "split_files/diffusion_models/qwen_image_edit_2511_bf16.safetensors" "diffusion_models"
+    else
+        dl "$REPO" "split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors" "diffusion_models"
+    fi
     ;;
   3)
     REPO="lightx2v/Qwen-Image-2512-Lightning"

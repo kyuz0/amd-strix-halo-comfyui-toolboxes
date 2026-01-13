@@ -13,6 +13,50 @@ WORKFLOW_DIR = Path("/opt/comfy-workflows")
 
 # --- Mappings ---
 WORKFLOW_MAPPINGS = [
+    # --- High Precision (BF16/FP16) ---
+    # Wan 2.2 FP16
+    {
+        "keywords": ["Wan2.2", "I2V", "FP16"], 
+        "script": "get_wan22.sh", 
+        "args": ["common", "14b-i2v", "lora", "fp16"],
+        "name": "Wan 2.2 - Image to Video (14B) - FP16"
+    },
+    {
+        "keywords": ["Wan2.2", "T2V", "FP16"], 
+        "script": "get_wan22.sh", 
+        "args": ["common", "14b-t2v", "lora", "fp16"],
+        "name": "Wan 2.2 - Text to Video (14B) - FP16"
+    },
+
+    # Qwen Image BF16
+    {
+        "keywords": ["Qwen-Image", "LoRA", "BF16"],
+        "script": "get_qwen_image.sh", 
+        "args": ["3", "bf16"], 
+        "name": "Qwen Image + Lightning LoRA (4-steps) - BF16"
+    },
+    {
+        "keywords": ["Qwen-Image", "BF16"],
+        "script": "get_qwen_image.sh", 
+        "args": ["1", "bf16"], 
+        "name": "Qwen Image (Base 20B) - BF16"
+    },
+
+    # Qwen Edit BF16
+    {
+         "keywords": ["Qwen-Image-Edit", "LoRA", "BF16"],
+         "script": "get_qwen_image.sh",
+         "args": ["4", "bf16"],
+         "name": "Qwen Image Edit + Lightning LoRA - BF16"
+    },
+    {
+         "keywords": ["Qwen-Image-Edit", "BF16"],
+         "script": "get_qwen_image.sh",
+         "args": ["2", "bf16"], 
+         "name": "Qwen Image Edit (Base) - BF16"
+    },
+
+    # --- Standard (FP8) ---
     # Hunyuan 1.5
     {
         "keywords": ["Hunyuan", "i2v"], 

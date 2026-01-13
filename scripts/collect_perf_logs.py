@@ -106,7 +106,8 @@ def main():
         comfy_cmd = [
             sys.executable, "main.py",
             "--port", str(server_port),
-            "--output-directory", comfy_outputs_dir
+            "--output-directory", comfy_outputs_dir,
+            "--disable-mmap", "--fp16-vae"
         ]
         
         # We capture the server stdout/stderr to this file
