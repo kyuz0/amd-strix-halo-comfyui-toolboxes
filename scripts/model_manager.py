@@ -175,13 +175,13 @@ def find_available_families():
     for family in MODEL_FAMILIES:
         # Check if ANY workflow matches this family's criteria
         for filename in workflow_files:
-            # Check mandatory keywords
-            if not all(k in filename for k in family["keywords"]):
+            # Check mandatory keywords (Case Insensitive)
+            if not all(k.lower() in filename.lower() for k in family["keywords"]):
                 continue
                 
-            # Check exclusions
+            # Check exclusions (Case Insensitive)
             if "exclude_keywords" in family:
-                if any(ek in filename for ek in family["exclude_keywords"]):
+                if any(ek.lower() in filename.lower() for ek in family["exclude_keywords"]):
                     continue
             
             # If we found a match, this family is available.
