@@ -171,11 +171,15 @@ def main():
         print("No JSON workflows found.")
         return
 
+    # Define absolute path for output
+    output_path = os.path.abspath(args.output)
+    print(f"Results will be saved to: {output_path}")
+
     # Load existing results for caching
     results = []
-    if os.path.exists(args.output):
+    if os.path.exists(output_path):
         try:
-            with open(args.output, 'r') as f:
+            with open(output_path, 'r') as f:
                 results = json.load(f)
                 print(f"Loaded {len(results)} existing results.")
         except Exception as e:
@@ -274,8 +278,16 @@ def main():
                     results.append(result_entry)
                     
                     # Save incremental results
-                    with open(args.output, 'w') as f:
-                        json.dump(results, f, indent=2)
+                    try:
+                        with open(output_path, 'w') as f:
+                            json.dump(results, f, indent=2)
+                        print(f"Satisfactorily saved results to {output_path}")
+                    except PermissionError:
+                         print(f"CRITICAL ERROR: Permission denied when writing to {output_path}")
+                    except OSError as e:
+                         print(f"CRITICAL ERROR: OS error when writing to {output_path}: {e}")
+                    except Exception as e:
+                         print(f"CRITICAL ERROR: Failed to write results to {output_path}: {e}")
                         
                 except Exception as e:
                     print(f"Exception running workflow: {e}")
@@ -292,7 +304,7 @@ def main():
                     process.kill()
                 log_file.close()
 
-    print(f"\nAll benchmarks complete. Results saved to {args.output}")
+    print(f"\nAll benchmarks complete. Results saved to {output_path}")
 
 if __name__ == "__main__":
     main()

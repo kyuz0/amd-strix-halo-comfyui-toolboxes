@@ -73,7 +73,7 @@ mkdir -p "$MODEL_HOME"/{text_encoders,vae,diffusion_models,clip_vision,latent_up
     clean-stage   Remove staging folder (keeps final models)
     clean-cache   Remove Hugging Face cache (~/.cache/huggingface)
   
-  USAGE
+USAGE
   }
   
   case "${1:-}" in

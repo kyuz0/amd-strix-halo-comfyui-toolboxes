@@ -1,183 +1,183 @@
 [
   {
-    "workflow": "Qwen-Image-Edit-2511-FP8-20-Steps.json",
+    "workflow": "Qwen-Image-2512-BF16-20-Steps.json",
     "config": "default",
     "status": "success",
-    "duration_seconds": 194.1884777545929,
-    "cold_run_seconds": 194.1884777545929,
-    "warm_run_seconds": 167.2978320121765,
-    "timestamp": 1767188003.3174708,
+    "duration_seconds": 292.74202728271484,
+    "cold_run_seconds": 292.74202728271484,
+    "warm_run_seconds": 397.5099992752075,
+    "timestamp": 1768504639.6108544,
     "env": {}
   },
   {
-    "workflow": "Qwen-Image-Edit-2511-FP8-4-Step-LoRA.json",
+    "workflow": "Qwen-Image-2512-BF16-4-Step-LoRA.json",
     "config": "default",
     "status": "success",
-    "duration_seconds": 56.560943603515625,
-    "cold_run_seconds": 56.560943603515625,
-    "warm_run_seconds": 20.112775087356567,
-    "timestamp": 1767188083.2132213,
+    "duration_seconds": 73.6029725074768,
+    "cold_run_seconds": 73.6029725074768,
+    "warm_run_seconds": 73.76594471931458,
+    "timestamp": 1768504793.0110922,
     "env": {}
   },
   {
-    "workflow": "Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1.json",
+    "workflow": "Qwen-Image-Edit-2511-BF16-20-Steps.json",
     "config": "default",
     "status": "success",
-    "duration_seconds": 594.622150182724,
-    "cold_run_seconds": 594.622150182724,
-    "warm_run_seconds": 519.757034778595,
-    "timestamp": 1767189467.3685634,
+    "duration_seconds": 725.6330382823944,
+    "cold_run_seconds": 725.6330382823944,
+    "warm_run_seconds": 735.6700131893158,
+    "timestamp": 1768506268.8835464,
     "env": {}
   },
   {
-    "workflow": "Wan2.2-T2V-A14B-FP8-4steps-lora-rank64-Seko-V2.json",
+    "workflow": "Qwen-Image-Edit-2511-BF16-4-Step-LoRA.json",
     "config": "default",
     "status": "success",
-    "duration_seconds": 547.9777524471283,
-    "cold_run_seconds": 547.9777524471283,
-    "warm_run_seconds": 519.6348538398743,
-    "timestamp": 1767190540.2702346,
+    "duration_seconds": 110.79087471961975,
+    "cold_run_seconds": 110.79087471961975,
+    "warm_run_seconds": 110.92742085456848,
+    "timestamp": 1768506496.097327,
     "env": {}
   },
   {
-    "workflow": "video_hunyuan_video_1.5_720p_i2v.json",
+    "workflow": "Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1-FP16.json",
     "config": "default",
     "status": "success",
-    "duration_seconds": 744.1303510665894,
-    "cold_run_seconds": 744.1303510665894,
-    "warm_run_seconds": 741.1708626747131,
-    "timestamp": 1767192029.3999543,
+    "duration_seconds": 8308.563943624496,
+    "cold_run_seconds": 8308.563943624496,
+    "warm_run_seconds": 8324.92950797081,
+    "timestamp": 1768523144.0233192,
     "env": {}
   },
   {
-    "workflow": "video_hunyuan_video_1.5_720p_t2v.json",
+    "workflow": "Wan2.2-T2V-A14B-FP16-4steps-lora-rank64-Seko-V2.json",
     "config": "default",
     "status": "success",
-    "duration_seconds": 726.3518576622009,
-    "cold_run_seconds": 726.3518576622009,
-    "warm_run_seconds": 704.4761824607849,
-    "timestamp": 1767193464.1476498,
+    "duration_seconds": 8313.499592542648,
+    "cold_run_seconds": 8313.499592542648,
+    "warm_run_seconds": 8277.14279294014,
+    "timestamp": 1768539743.3150852,
     "env": {}
   },
   {
-    "workflow": "Qwen-Image-Edit-2511-FP8-4-Step-LoRA.json",
+    "workflow": "Qwen-Image-2512-BF16-20-Steps.json",
     "config": "miopen_hipblaslt",
     "status": "success",
-    "duration_seconds": 50.85533285140991,
-    "cold_run_seconds": 50.85533285140991,
-    "warm_run_seconds": 19.766613006591797,
-    "timestamp": 1767194246.8226848,
+    "duration_seconds": 402.83028507232666,
+    "cold_run_seconds": 402.83028507232666,
+    "warm_run_seconds": 413.8516356945038,
+    "timestamp": 1768540577.5828736,
     "env": {
       "TORCH_BLAS_PREFER_HIPBLASLT": "1",
       "COMFYUI_ENABLE_MIOPEN": "1"
     }
   },
   {
-    "workflow": "Wan2.2-T2V-A14B-FP8-4steps-lora-rank64-Seko-V2.json",
+    "workflow": "Qwen-Image-2512-BF16-4-Step-LoRA.json",
     "config": "miopen_hipblaslt",
     "status": "success",
-    "duration_seconds": 577.4866223335266,
-    "cold_run_seconds": 577.4866223335266,
-    "warm_run_seconds": 548.1937310695648,
-    "timestamp": 1767197547.2275698,
+    "duration_seconds": 78.9764130115509,
+    "cold_run_seconds": 78.9764130115509,
+    "warm_run_seconds": 77.88005256652832,
+    "timestamp": 1768540740.3798134,
     "env": {
       "TORCH_BLAS_PREFER_HIPBLASLT": "1",
       "COMFYUI_ENABLE_MIOPEN": "1"
     }
   },
   {
-    "workflow": "video_hunyuan_video_1.5_720p_t2v.json",
+    "workflow": "Qwen-Image-Edit-2511-BF16-20-Steps.json",
     "config": "miopen_hipblaslt",
     "status": "success",
-    "duration_seconds": 775.5385026931763,
-    "cold_run_seconds": 775.5385026931763,
-    "warm_run_seconds": 743.7972421646118,
-    "timestamp": 1767205476.1930587,
+    "duration_seconds": 739.6205899715424,
+    "cold_run_seconds": 739.6205899715424,
+    "warm_run_seconds": 747.3010439872742,
+    "timestamp": 1768542241.584867,
     "env": {
       "TORCH_BLAS_PREFER_HIPBLASLT": "1",
       "COMFYUI_ENABLE_MIOPEN": "1"
     }
   },
   {
-    "workflow": "Qwen-Image-2512-FP8-20-Steps.json",
+    "workflow": "Qwen-Image-Edit-2511-BF16-4-Step-LoRA.json",
+    "config": "miopen_hipblaslt",
+    "status": "success",
+    "duration_seconds": 117.81221199035645,
+    "cold_run_seconds": 117.81221199035645,
+    "warm_run_seconds": 118.64797043800354,
+    "timestamp": 1768542482.6925168,
+    "env": {
+      "TORCH_BLAS_PREFER_HIPBLASLT": "1",
+      "COMFYUI_ENABLE_MIOPEN": "1"
+    }
+  },
+  {
+    "workflow": "Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1-FP16.json",
+    "config": "miopen_hipblaslt",
+    "status": "success",
+    "duration_seconds": 8486.587194442749,
+    "cold_run_seconds": 8486.587194442749,
+    "warm_run_seconds": 8317.11708688736,
+    "timestamp": 1768559301.0143995,
+    "env": {
+      "TORCH_BLAS_PREFER_HIPBLASLT": "1",
+      "COMFYUI_ENABLE_MIOPEN": "1"
+    }
+  },
+  {
+    "workflow": "Wan2.2-T2V-A14B-FP16-4steps-lora-rank64-Seko-V2.json",
+    "config": "miopen_hipblaslt",
+    "status": "success",
+    "duration_seconds": 8283.36699104309,
+    "cold_run_seconds": 8283.36699104309,
+    "warm_run_seconds": 8295.104821681976,
+    "timestamp": 1768575889.6476116,
+    "env": {
+      "TORCH_BLAS_PREFER_HIPBLASLT": "1",
+      "COMFYUI_ENABLE_MIOPEN": "1"
+    }
+  },
+  {
+    "workflow": "Hunyuan-Video-1.5_720p_i2v-4-step-lora.json",
     "config": "default",
     "status": "success",
-    "duration_seconds": 101.18062949180603,
-    "cold_run_seconds": 101.18062949180603,
-    "warm_run_seconds": 85.90506219863892,
-    "timestamp": 1767266381.224983,
+    "duration_seconds": 928.4718887805939,
+    "cold_run_seconds": 928.4718887805939,
+    "warm_run_seconds": 953.1248636245728,
+    "timestamp": 1768592050.34829,
     "env": {}
   },
   {
-    "workflow": "Qwen-Image-2512-FP8-4-Step-LoRA.json",
+    "workflow": "Hunyuan-Video-1.5_720p_t2v-4-step-lora.json",
     "config": "default",
     "status": "success",
-    "duration_seconds": 33.44408059120178,
-    "cold_run_seconds": 33.44408059120178,
-    "warm_run_seconds": 12.35529112815857,
-    "timestamp": 1767266430.252153,
+    "duration_seconds": 942.1182162761688,
+    "cold_run_seconds": 942.1182162761688,
+    "warm_run_seconds": 944.603574514389,
+    "timestamp": 1768593941.454643,
     "env": {}
   },
   {
-    "workflow": "Qwen-Image-2512-FP8-20-Steps.json",
+    "workflow": "Hunyuan-Video-1.5_720p_i2v-4-step-lora.json",
     "config": "miopen_hipblaslt",
     "status": "success",
-    "duration_seconds": 102.0415518283844,
-    "cold_run_seconds": 102.0415518283844,
-    "warm_run_seconds": 85.83704924583435,
-    "timestamp": 1767266621.558839,
+    "duration_seconds": 1539.7378225326538,
+    "cold_run_seconds": 1539.7378225326538,
+    "warm_run_seconds": 982.1938276290894,
+    "timestamp": 1768640146.7151358,
     "env": {
       "TORCH_BLAS_PREFER_HIPBLASLT": "1",
       "COMFYUI_ENABLE_MIOPEN": "1"
     }
   },
   {
-    "workflow": "Qwen-Image-2512-FP8-4-Step-LoRA.json",
+    "workflow": "Hunyuan-Video-1.5_720p_t2v-4-step-lora.json",
     "config": "miopen_hipblaslt",
     "status": "success",
-    "duration_seconds": 33.45355582237244,
-    "cold_run_seconds": 33.45355582237244,
-    "warm_run_seconds": 12.13328766822815,
-    "timestamp": 1767266670.3733497,
-    "env": {
-      "TORCH_BLAS_PREFER_HIPBLASLT": "1",
-      "COMFYUI_ENABLE_MIOPEN": "1"
-    }
-  },
-  {
-    "workflow": "Qwen-Image-Edit-2511-FP8-20-Steps.json",
-    "config": "miopen_hipblaslt",
-    "status": "success",
-    "duration_seconds": 184.30693173408508,
-    "cold_run_seconds": 184.30693173408508,
-    "warm_run_seconds": 155.64278960227966,
-    "timestamp": 1767352255.7701716,
-    "env": {
-      "TORCH_BLAS_PREFER_HIPBLASLT": "1",
-      "COMFYUI_ENABLE_MIOPEN": "1"
-    }
-  },
-  {
-    "workflow": "Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1.json",
-    "config": "miopen_hipblaslt",
-    "status": "success",
-    "duration_seconds": 634.2552165985107,
-    "cold_run_seconds": 634.2552165985107,
-    "warm_run_seconds": 547.0542087554932,
-    "timestamp": 1767353440.2613642,
-    "env": {
-      "TORCH_BLAS_PREFER_HIPBLASLT": "1",
-      "COMFYUI_ENABLE_MIOPEN": "1"
-    }
-  },
-  {
-    "workflow": "video_hunyuan_video_1.5_720p_i2v.json",
-    "config": "miopen_hipblaslt",
-    "status": "success",
-    "duration_seconds": 809.0809795856476,
-    "cold_run_seconds": 809.0809795856476,
-    "warm_run_seconds": 795.6097841262817,
-    "timestamp": 1767355050.0456913,
+    "duration_seconds": 971.8132796287537,
+    "cold_run_seconds": 971.8132796287537,
+    "warm_run_seconds": 971.5784537792206,
+    "timestamp": 1768642094.7741845,
     "env": {
       "TORCH_BLAS_PREFER_HIPBLASLT": "1",
       "COMFYUI_ENABLE_MIOPEN": "1"

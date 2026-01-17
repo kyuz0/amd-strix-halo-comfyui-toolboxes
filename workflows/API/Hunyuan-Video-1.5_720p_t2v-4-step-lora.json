@@ -1,4 +1,20 @@
 {
+  "8": {
+    "inputs": {
+      "samples": [
+        "127",
+        0
+      ],
+      "vae": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
   "10": {
     "inputs": {
       "vae_name": "hunyuanvideo15_vae_fp16.safetensors"
@@ -32,7 +48,7 @@
   },
   "44": {
     "inputs": {
-      "text": "Static camera shot, wide shot, sunrise time, side lighting, warm colors. A dinosaur runs swiftly through a savanna, sunlight casting long shadows on the grassy terrain. The lions cower and scatter as the dinosaur approaches, bushes and trees swaying slightly in the breeze. The sky is a beautiful blend of orange and pink hues, highlighting the dramatic scene.",
+      "text": "A paper airplane released from the top of a skyscraper, gliding through urban canyons, crossing traffic, flying over streets, spiraling upward between buildings. The camera follows the paper airplane's perspective, shooting cityscape in first-person POV, finally flying toward the sunset, disappearing in golden light. Creative camera movement, free perspective, dreamlike colors.",
       "clip": [
         "11",
         0
@@ -74,6 +90,7 @@
       "filename_prefix": "video/hunyuan_video_1.5",
       "format": "auto",
       "codec": "h264",
+      "video-preview": "",
       "video": [
         "101",
         0
@@ -108,7 +125,7 @@
     "inputs": {
       "width": 1280,
       "height": 720,
-      "length": 121,
+      "length": 61,
       "batch_size": 1
     },
     "class_type": "EmptyHunyuanVideo15Latent",

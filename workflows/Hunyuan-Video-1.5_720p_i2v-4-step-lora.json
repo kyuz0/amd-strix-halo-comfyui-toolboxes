@@ -464,84 +464,6 @@
       "bgcolor": "#000"
     },
     {
-      "id": 78,
-      "type": "HunyuanVideo15ImageToVideo",
-      "pos": [
-        -160,
-        580
-      ],
-      "size": [
-        296.3169921875,
-        210
-      ],
-      "flags": {},
-      "order": 27,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "positive",
-          "type": "CONDITIONING",
-          "link": 222
-        },
-        {
-          "name": "negative",
-          "type": "CONDITIONING",
-          "link": 246
-        },
-        {
-          "name": "vae",
-          "type": "VAE",
-          "link": 224
-        },
-        {
-          "name": "start_image",
-          "shape": 7,
-          "type": "IMAGE",
-          "link": 218
-        },
-        {
-          "name": "clip_vision_output",
-          "shape": 7,
-          "type": "CLIP_VISION_OUTPUT",
-          "link": 217
-        }
-      ],
-      "outputs": [
-        {
-          "name": "positive",
-          "type": "CONDITIONING",
-          "links": [
-            318
-          ]
-        },
-        {
-          "name": "negative",
-          "type": "CONDITIONING",
-          "links": [
-            319
-          ]
-        },
-        {
-          "name": "latent",
-          "type": "LATENT",
-          "links": [
-            315
-          ]
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "HunyuanVideo15ImageToVideo",
-        "cnr_id": "comfy-core",
-        "ver": "0.3.68"
-      },
-      "widgets_values": [
-        1280,
-        720,
-        121,
-        1
-      ]
-    },
-    {
       "id": 116,
       "type": "EasyCache",
       "pos": [
@@ -1959,6 +1881,84 @@
         "auto",
         "h264"
       ]
+    },
+    {
+      "id": 78,
+      "type": "HunyuanVideo15ImageToVideo",
+      "pos": [
+        -160,
+        580
+      ],
+      "size": [
+        296.3169921875,
+        210
+      ],
+      "flags": {},
+      "order": 27,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 222
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 246
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 224
+        },
+        {
+          "name": "start_image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 218
+        },
+        {
+          "name": "clip_vision_output",
+          "shape": 7,
+          "type": "CLIP_VISION_OUTPUT",
+          "link": 217
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            318
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            319
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            315
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "HunyuanVideo15ImageToVideo",
+        "cnr_id": "comfy-core",
+        "ver": "0.3.68"
+      },
+      "widgets_values": [
+        1280,
+        720,
+        61,
+        1
+      ]
     }
   ],
   "links": [
@@ -2562,11 +2562,11 @@
     "ds": {
       "scale": 0.7808071307447048,
       "offset": [
-        162.6984650323417,
-        294.7925423346564
+        389.33193734864204,
+        295.94319460795606
       ]
     },
-    "frontendVersion": "1.34.9",
+    "frontendVersion": "1.36.14",
     "workflowRendererVersion": "LG",
     "groupNodes": {},
     "VHS_latentpreview": false,
