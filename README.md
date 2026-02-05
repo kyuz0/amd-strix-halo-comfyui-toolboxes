@@ -7,7 +7,13 @@ This repository provides a pre-configured Docker container to run **ComfyUI** wi
 
 ## Watch the YouTube Video
 
-[![Watch the YouTube Video](https://img.youtube.com/vi/a_xzC7ckwno/maxresdefault.jpg)](https://youtu.be/a_xzC7ckwno)  
+> [!IMPORTANT]
+> **Work In Progress**: This toolbox is functional, but is still under active testing.  
+> A full setup guide and video walkthrough is planned for second half of**February 2025**.
+
+## Watch the YouTube Video
+
+*Coming Soon (February 2025)*
 
 
 ---
