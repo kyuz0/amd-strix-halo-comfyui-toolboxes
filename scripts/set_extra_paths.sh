@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # setup_extra_paths.sh
 
 set -euo pipefail
