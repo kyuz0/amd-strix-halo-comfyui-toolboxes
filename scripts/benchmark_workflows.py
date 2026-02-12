@@ -158,6 +158,7 @@ def main():
     parser.add_argument("--server", default="localhost:8000", help="Address of ComfyUI server (host:port)") 
     parser.add_argument("--output", default="benchmark_results.json", help="Output JSON file for results")
     parser.add_argument("--skip-errors", action="store_true", help="Continue regular execution if a workflow fails")
+    parser.add_argument("--warm-start", action="store_true", help="Run a second 'warm start' execution for each workflow")
 
     args = parser.parse_args()
     
@@ -187,11 +188,7 @@ def main():
 
     # Define configurations
     configs = [
-        {"name": "default", "env": {}},
-        {"name": "miopen_hipblaslt", "env": {
-            "TORCH_BLAS_PREFER_HIPBLASLT": "1",
-            "COMFYUI_ENABLE_MIOPEN": "1"
-        }}
+        {"name": "default", "env": {}}
     ]
 
     server_host, server_port = args.server.split(':')
@@ -230,7 +227,7 @@ def main():
                 sys.executable, "main.py",
                 "--port", server_port,
                 "--output-directory", comfy_outputs_dir,
-                "--disable-mmap", "--bf16-vae", "--cache-none"
+                "--disable-mmap", "--bf16-vae", "--gpu-only"
             ]
             
             log_file = open("server.log", "w") # Overwrite log for each run
@@ -258,7 +255,7 @@ def main():
                     duration_cold = benchmark_workflow(args.server, filepath, randomize_seed=True)
                     
                     duration_warm = None
-                    if duration_cold is not None:
+                    if duration_cold is not None and args.warm_start:
                         print("--> Warm Start Run...")
                         duration_warm = benchmark_workflow(args.server, filepath, randomize_seed=True)
 

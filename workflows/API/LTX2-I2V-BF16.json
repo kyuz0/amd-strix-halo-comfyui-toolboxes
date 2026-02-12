@@ -1,0 +1,618 @@
+{
+  "75": {
+    "inputs": {
+      "filename_prefix": "video/LTX_2.0_i2v",
+      "format": "auto",
+      "codec": "auto",
+      "video-preview": "",
+      "video": [
+        "92:97",
+        0
+      ]
+    },
+    "class_type": "SaveVideo",
+    "_meta": {
+      "title": "Save Video"
+    }
+  },
+  "98": {
+    "inputs": {
+      "image": "example2.jpg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "102": {
+    "inputs": {
+      "resize_type": "scale dimensions",
+      "resize_type.width": 1280,
+      "resize_type.height": 720,
+      "resize_type.crop": "center",
+      "scale_method": "lanczos",
+      "input": [
+        "98",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "Resize Image/Mask"
+    }
+  },
+  "92:8": {
+    "inputs": {
+      "sampler_name": "euler"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "92:9": {
+    "inputs": {
+      "steps": 20,
+      "max_shift": 2.05,
+      "base_shift": 0.95,
+      "stretch": true,
+      "terminal": 0.1,
+      "latent": [
+        "92:56",
+        0
+      ]
+    },
+    "class_type": "LTXVScheduler",
+    "_meta": {
+      "title": "LTXVScheduler"
+    }
+  },
+  "92:60": {
+    "inputs": {
+      "text_encoder": "gemma_3_12B_it_fp4_mixed.safetensors",
+      "ckpt_name": "ltx-2-19b-dev.safetensors",
+      "device": "default"
+    },
+    "class_type": "LTXAVTextEncoderLoader",
+    "_meta": {
+      "title": "LTXV Audio Text Encoder Loader"
+    }
+  },
+  "92:66": {
+    "inputs": {
+      "sampler_name": "gradient_estimation"
+    },
+    "class_type": "KSamplerSelect",
+    "_meta": {
+      "title": "KSamplerSelect"
+    }
+  },
+  "92:73": {
+    "inputs": {
+      "sigmas": "0.909375, 0.725, 0.421875, 0.0"
+    },
+    "class_type": "ManualSigmas",
+    "_meta": {
+      "title": "ManualSigmas"
+    }
+  },
+  "92:76": {
+    "inputs": {
+      "model_name": "ltx-2-spatial-upscaler-x2-1.0.safetensors"
+    },
+    "class_type": "LatentUpscaleModelLoader",
+    "_meta": {
+      "title": "Load Latent Upscale Model"
+    }
+  },
+  "92:81": {
+    "inputs": {
+      "positive": [
+        "92:22",
+        0
+      ],
+      "negative": [
+        "92:22",
+        1
+      ],
+      "latent": [
+        "92:80",
+        0
+      ]
+    },
+    "class_type": "LTXVCropGuides",
+    "_meta": {
+      "title": "LTXVCropGuides"
+    }
+  },
+  "92:82": {
+    "inputs": {
+      "cfg": 1,
+      "model": [
+        "92:68",
+        0
+      ],
+      "positive": [
+        "92:81",
+        0
+      ],
+      "negative": [
+        "92:81",
+        1
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "CFGGuider"
+    }
+  },
+  "92:51": {
+    "inputs": {
+      "frames_number": [
+        "92:62",
+        0
+      ],
+      "frame_rate": 25,
+      "batch_size": 1,
+      "audio_vae": [
+        "92:48",
+        0
+      ]
+    },
+    "class_type": "LTXVEmptyLatentAudio",
+    "_meta": {
+      "title": "LTXV Empty Latent Audio"
+    }
+  },
+  "92:22": {
+    "inputs": {
+      "frame_rate": 25,
+      "positive": [
+        "92:3",
+        0
+      ],
+      "negative": [
+        "92:4",
+        0
+      ]
+    },
+    "class_type": "LTXVConditioning",
+    "_meta": {
+      "title": "LTXVConditioning"
+    }
+  },
+  "92:4": {
+    "inputs": {
+      "text": "blurry, low quality, still frame, frames, watermark, overlay, titles, has blurbox, has subtitles",
+      "clip": [
+        "92:60",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "92:89": {
+    "inputs": {
+      "width": [
+        "92:105",
+        0
+      ],
+      "height": [
+        "92:105",
+        1
+      ],
+      "batch_size": 1,
+      "color": 0
+    },
+    "class_type": "EmptyImage",
+    "_meta": {
+      "title": "EmptyImage"
+    }
+  },
+  "92:41": {
+    "inputs": {
+      "noise": [
+        "92:11",
+        0
+      ],
+      "guider": [
+        "92:47",
+        0
+      ],
+      "sampler": [
+        "92:8",
+        0
+      ],
+      "sigmas": [
+        "92:9",
+        0
+      ],
+      "latent_image": [
+        "92:56",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "92:67": {
+    "inputs": {
+      "noise_seed": 0
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "92:11": {
+    "inputs": {
+      "noise_seed": 10
+    },
+    "class_type": "RandomNoise",
+    "_meta": {
+      "title": "RandomNoise"
+    }
+  },
+  "92:3": {
+    "inputs": {
+      "text": "A wide, dynamic tracking shot follows a group of mountain bikers as they race across a pristine snow-covered landscape on a brilliant winter morning. The camera moves at speed, keeping pace with the lead biker in a vibrant yellow jacket and orange helmet, who launches into the air over a snow mound, their bike suspended against the clear blue sky. Snow particles explode around them, catching the golden light of the low sun that creates dramatic backlighting and long shadows across the terrain. Several other bikers follow closely behind, their dark silhouettes kicking up plumes of powdery snow as they navigate the undulating mounds. The only sounds are the crunch of tires biting into packed snow, the whoosh of air as they fly through jumps, and the distant sound of heavy breathing and excited shouts. One biker calls out to another with exhilaration: “This is incredible! The light is perfect!” Another responds with a breathless laugh: “Keep pushing! We’re almost at the ridge!” The camera glides smoothly alongside the group, occasionally pulling back to reveal the full expanse of the snowy landscape with bare birch trees and dark evergreens lining the edge. The mood is exhilarating, fast-paced, and full of the raw energy of winter mountain biking, with every jump and turn captured in crisp detail against the brilliant white snow and vibrant sky.\n",
+      "clip": [
+        "92:60",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "92:97": {
+    "inputs": {
+      "fps": 25,
+      "images": [
+        "92:95",
+        0
+      ],
+      "audio": [
+        "92:96",
+        0
+      ]
+    },
+    "class_type": "CreateVideo",
+    "_meta": {
+      "title": "Create Video"
+    }
+  },
+  "92:80": {
+    "inputs": {
+      "av_latent": [
+        "92:41",
+        0
+      ]
+    },
+    "class_type": "LTXVSeparateAVLatent",
+    "_meta": {
+      "title": "LTXVSeparateAVLatent"
+    }
+  },
+  "92:94": {
+    "inputs": {
+      "av_latent": [
+        "92:70",
+        1
+      ]
+    },
+    "class_type": "LTXVSeparateAVLatent",
+    "_meta": {
+      "title": "LTXVSeparateAVLatent"
+    }
+  },
+  "92:70": {
+    "inputs": {
+      "noise": [
+        "92:67",
+        0
+      ],
+      "guider": [
+        "92:82",
+        0
+      ],
+      "sampler": [
+        "92:66",
+        0
+      ],
+      "sigmas": [
+        "92:73",
+        0
+      ],
+      "latent_image": [
+        "92:83",
+        0
+      ]
+    },
+    "class_type": "SamplerCustomAdvanced",
+    "_meta": {
+      "title": "SamplerCustomAdvanced"
+    }
+  },
+  "92:96": {
+    "inputs": {
+      "samples": [
+        "92:94",
+        1
+      ],
+      "audio_vae": [
+        "92:48",
+        0
+      ]
+    },
+    "class_type": "LTXVAudioVAEDecode",
+    "_meta": {
+      "title": "LTXV Audio VAE Decode"
+    }
+  },
+  "92:48": {
+    "inputs": {
+      "ckpt_name": "ltx-2-19b-dev.safetensors"
+    },
+    "class_type": "LTXVAudioVAELoader",
+    "_meta": {
+      "title": "LTXV Audio VAE Loader"
+    }
+  },
+  "92:56": {
+    "inputs": {
+      "video_latent": [
+        "92:107",
+        0
+      ],
+      "audio_latent": [
+        "92:51",
+        0
+      ]
+    },
+    "class_type": "LTXVConcatAVLatent",
+    "_meta": {
+      "title": "LTXVConcatAVLatent"
+    }
+  },
+  "92:84": {
+    "inputs": {
+      "samples": [
+        "92:81",
+        2
+      ],
+      "upscale_model": [
+        "92:76",
+        0
+      ],
+      "vae": [
+        "92:1",
+        2
+      ]
+    },
+    "class_type": "LTXVLatentUpsampler",
+    "_meta": {
+      "title": "spatial"
+    }
+  },
+  "92:90": {
+    "inputs": {
+      "upscale_method": "lanczos",
+      "scale_by": 0.5,
+      "image": [
+        "92:89",
+        0
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "92:62": {
+    "inputs": {
+      "value": 121
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "Length"
+    }
+  },
+  "92:91": {
+    "inputs": {
+      "image": [
+        "92:90",
+        0
+      ]
+    },
+    "class_type": "GetImageSize",
+    "_meta": {
+      "title": "Get Image Size"
+    }
+  },
+  "92:105": {
+    "inputs": {
+      "image": [
+        "102",
+        0
+      ]
+    },
+    "class_type": "GetImageSize",
+    "_meta": {
+      "title": "Get Image Size"
+    }
+  },
+  "92:99": {
+    "inputs": {
+      "img_compression": 33,
+      "image": [
+        "92:106",
+        0
+      ]
+    },
+    "class_type": "LTXVPreprocess",
+    "_meta": {
+      "title": "LTXVPreprocess"
+    }
+  },
+  "92:43": {
+    "inputs": {
+      "width": [
+        "92:91",
+        0
+      ],
+      "height": [
+        "92:91",
+        1
+      ],
+      "length": [
+        "92:62",
+        0
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLTXVLatentVideo",
+    "_meta": {
+      "title": "EmptyLTXVLatentVideo"
+    }
+  },
+  "92:107": {
+    "inputs": {
+      "strength": 1,
+      "bypass": false,
+      "vae": [
+        "92:1",
+        2
+      ],
+      "image": [
+        "92:99",
+        0
+      ],
+      "latent": [
+        "92:43",
+        0
+      ]
+    },
+    "class_type": "LTXVImgToVideoInplace",
+    "_meta": {
+      "title": "LTXVImgToVideoInplace"
+    }
+  },
+  "92:83": {
+    "inputs": {
+      "video_latent": [
+        "92:108",
+        0
+      ],
+      "audio_latent": [
+        "92:80",
+        1
+      ]
+    },
+    "class_type": "LTXVConcatAVLatent",
+    "_meta": {
+      "title": "LTXVConcatAVLatent"
+    }
+  },
+  "92:108": {
+    "inputs": {
+      "strength": 1,
+      "bypass": false,
+      "vae": [
+        "92:1",
+        2
+      ],
+      "image": [
+        "92:99",
+        0
+      ],
+      "latent": [
+        "92:84",
+        0
+      ]
+    },
+    "class_type": "LTXVImgToVideoInplace",
+    "_meta": {
+      "title": "LTXVImgToVideoInplace"
+    }
+  },
+  "92:47": {
+    "inputs": {
+      "cfg": 4,
+      "model": [
+        "92:1",
+        0
+      ],
+      "positive": [
+        "92:22",
+        0
+      ],
+      "negative": [
+        "92:22",
+        1
+      ]
+    },
+    "class_type": "CFGGuider",
+    "_meta": {
+      "title": "CFGGuider"
+    }
+  },
+  "92:68": {
+    "inputs": {
+      "lora_name": "ltx-2-19b-distilled-lora-384.safetensors",
+      "strength_model": 1,
+      "model": [
+        "92:1",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  },
+  "92:106": {
+    "inputs": {
+      "longer_edge": 1536,
+      "images": [
+        "102",
+        0
+      ]
+    },
+    "class_type": "ResizeImagesByLongerEdge",
+    "_meta": {
+      "title": "Resize Images by Longer Edge"
+    }
+  },
+  "92:1": {
+    "inputs": {
+      "ckpt_name": "ltx-2-19b-dev.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "92:95": {
+    "inputs": {
+      "samples": [
+        "92:94",
+        0
+      ],
+      "vae": [
+        "92:1",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  }
+}

@@ -139,6 +139,23 @@ MODEL_FAMILIES = [
             }
         ]
     },
+
+    # --- LTX-2 ---
+    {
+        "name": "LTX-2 (19B) - Video Generation",
+        "keywords": ["LTX"],
+        "script": "get_ltx2.sh",
+        "variants": [
+            {
+                "name": "Standard (BF16 Checkpoint + FP4 Text Enc)", 
+                "args": ["common", "checkpoint", "lora"]
+            },
+            {
+                "name": "FP8 (Compressed Checkpoint + FP4 Text Enc)", 
+                "args": ["common", "checkpoint fp8", "lora"]
+            }
+        ]
+    },
 ]
 
 def check_dependencies():

@@ -107,7 +107,7 @@ def main():
             sys.executable, "main.py",
             "--port", str(server_port),
             "--output-directory", comfy_outputs_dir,
-            "--disable-mmap", "--bf16-vae", "--cache-none"
+            "--disable-mmap", "--bf16-vae", "--gpu-only"
         ]
         
         # We capture the server stdout/stderr to this file
