@@ -300,6 +300,10 @@
         <header>
             <h1>AMD Ryzen AI Max “Strix Halo” ComfyUI Benchmarks</h1>
             <p class="subtitle">Performance results for various ComfyUI workflows</p>
+            <p style="margin: 8px 0 0 0; font-size: 0.9rem; color: var(--text-muted);">
+                Benchmarks run with:
+                <code>--disable-mmap --gpu-only --disable-smart-memory --cache-none --bf16-vae</code>
+            </p>
             <p style="margin: 8px 0 0 0; font-size: 0.9rem;">
                 <a href="https://github.com/kyuz0/amd-strix-halo-comfyui-toolboxes" target="_blank"
                     style="color: var(--primary); border-bottom: none;">View on GitHub &rarr;</a>
@@ -351,7 +355,9 @@
             "Wan2.2-I2V-A14B-4steps-lora-rank64-Seko-V1-FP16.json": { res: "1280x720 (41 frames)", mp: 0.92, type: "Video" },
             "Wan2.2-T2V-A14B-FP16-4steps-lora-rank64-Seko-V2.json": { res: "1280x720 (41 frames)", mp: 0.92, type: "Video" },
             "Hunyuan-Video-1.5_720p_i2v-4-step-lora.json": { res: "1280x720 (61 frames)", mp: 0.92, type: "Video" },
-            "Hunyuan-Video-1.5_720p_t2v-4-step-lora.json": { res: "1280x720 (61 frames)", mp: 0.92, type: "Video" }
+            "Hunyuan-Video-1.5_720p_t2v-4-step-lora.json": { res: "1280x720 (61 frames)", mp: 0.92, type: "Video" },
+            "LTX2-I2V-BF16.json": { res: "1280x720 (121 frames)", mp: 0.92, type: "Video" },
+            "LTX2-T2V-BF16.json": { res: "1280x720 (121 frames)", mp: 0.92, type: "Video" }
         };
 
         let rawData = [];
