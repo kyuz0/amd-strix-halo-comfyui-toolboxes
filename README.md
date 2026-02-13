@@ -127,7 +127,7 @@ Select the workflow you want to run (e.g., "Wan 2.2 - Text to Video"), and the m
 
 We maintain a list of performance benchmarks for these workflows on the AMD Ryzen AI Max “Strix Halo”.
 
-👉 **View Benchmarks:** [https://kyuz0.github.io/amd-strix-halo-comfyui/](https://kyuz0.github.io/amd-strix-halo-comfyui/)
+👉 **View Benchmarks:** [https://kyuz0.github.io/amd-strix-halo-comfyui-toolboxes/](https://kyuz0.github.io/amd-strix-halo-comfyui-toolboxes/)
 
 To run benchmarks yourself:
 ```bash
