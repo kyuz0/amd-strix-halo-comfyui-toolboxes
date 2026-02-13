@@ -15,6 +15,7 @@ comfyui:
 
     text_encoders: text_encoders
     vae: vae
+    checkpoints: checkpoints
     diffusion_models: diffusion_models
     unet: unet
     loras: loras

@@ -87,4 +87,4 @@ echo
 printf 'SSH tip: ssh -L 8000:localhost:8000 user@host\n\n'
 
 # Aliases
-alias start_comfy_ui='cd /opt/ComfyUI && python main.py --port 8000 --output-directory $HOME/comfy-outputs --disable-mmap --gpu-only --bf16-vae'
+alias start_comfy_ui='cd /opt/ComfyUI && python main.py --port 8000 --output-directory $HOME/comfy-outputs --disable-mmap --gpu-only --disable-smart-memory --bf16-vae'
