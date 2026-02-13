@@ -227,7 +227,7 @@ def main():
                 sys.executable, "main.py",
                 "--port", server_port,
                 "--output-directory", comfy_outputs_dir,
-                "--disable-mmap", "--bf16-vae", "--gpu-only", "--disable-smart-memory"
+                "--disable-mmap", "--bf16-vae", "--gpu-only", "--disable-smart-memory", "--cache-none"
             ]
             
             log_file = open("server.log", "w") # Overwrite log for each run
